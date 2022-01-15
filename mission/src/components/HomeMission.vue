@@ -1,13 +1,13 @@
 <template>
   <div class="home-input">
-    <input v-model="message" placeholder="">
-    <button v-on:click='rotateMessage'>제출</button>
-    <button v-on:click='NotificationEvent'>알림</button>
+    <h2>리팩토링 전 코드: 기능 동작, 잘못된 테스트 코드</h2>
+    <input v-model="message" placeholder="" />
+    <button v-on:click="rotateMessage">제출</button>
+    <button v-on:click="NotificationEvent">알림</button>
     <p>{{ message }}</p>
   </div>
 </template>
 <script>
-
 export default {
   name: 'HomeMission',
   data() {
@@ -20,13 +20,12 @@ export default {
     rotateMessage() {
       this.message = this.message.slice(1) + this.message[0];
     },
-    NotificationEvent() {
+    notificationEvent() {
       this.counter += 1;
-
+      // eslint-disable-next-line
       alert(`${this.message} ${this.counter}`);
     },
   },
-
 };
 </script>
 
