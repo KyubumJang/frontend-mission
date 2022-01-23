@@ -50,7 +50,8 @@ export default {
   flex-direction: row;
   align-items: center;
   justify-content: space-around;
-  position: absolute;
+  background-color: #fff;
+  position: fixed;
   width: 390px;
   height: 70px;
   left: 0px;
