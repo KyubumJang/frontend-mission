@@ -26,6 +26,12 @@ describe('ItemListPage', () => {
     expect(wrapper.find('[data-test="header-title"').text()).toBe(testHeaderTitle);
   });
 
+  // ItemList 컴포넌트
+  it('renders Item Component', () => {
+    const wrapper = mount(ItemListPage);
+    expect(wrapper.find('#item-wrapper').exists()).toBe(true);
+  });
+
   // NAV 컴포넌트
   it('renders NavBar Component', () => {
     const wrapper = mount(ItemListPage);

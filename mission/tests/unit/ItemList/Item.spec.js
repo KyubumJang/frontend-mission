@@ -1,10 +1,21 @@
 import { mount } from '@vue/test-utils';
-import ItemInfoPage from '@/components/ItemList/Item.vue';
+import Item from '../../../src/components/ItemList/Item.vue';
 
-describe('ItemListItem', () => {
-  it('redners ItemListItem', () => {
-    const wrapper = mount(ItemInfoPage);
-
-    expect(wrapper.find('.item-list-item').exists()).toBe(true);
+describe('Item', () => {
+  const testPrice = 20000;
+  const testOriginalPrice = 40000;
+  const testName = 'product 1';
+  const testDescription = 'description 1';
+  it('renders Item', () => {
+    const wrapper = mount(Item, {
+      propsData: {
+        price: testPrice,
+        original_price: testOriginalPrice,
+        name: testName,
+        description: testDescription,
+      },
+    });
+    expect(wrapper.get('div[data-test="item-name"]').exists()).toBe(true);
+    expect(wrapper.get('div[data-test="item-description"]').exists()).toBe(true);
   });
 });
