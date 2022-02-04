@@ -65,15 +65,9 @@
 </template>
 
 <script>
-import ProductDetail from '@/components/ProductDetail.vue';
-import Review from '@/components/Review.vue';
-
 export default {
   name: 'ItemInfoPage',
-  component: {
-    ProductDetail,
-    Review,
-  },
+  component: {},
   data() {
     return {
       product: 'clothes',
