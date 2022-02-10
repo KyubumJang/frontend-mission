@@ -1,63 +1,81 @@
 <template>
-  <div class="item-list-item">
-    <img data-test="item-image" src="@/assets/images/product.svg" />
-    <div class="item-info">
-      <div class="item-discount" v-if="isDiscounted()">
-        <div class="dicount-rate" data-test="discount-rate">{{ discountRate }}</div>
-        <div class="dicount-price" data-test="discount-price">
-          {{ priceStringWithComma(price) }}
+  <div class="item-list-item w3-container">
+    <div class="w3-panel">
+      <router-link :to="{ name:'Item', params: {id: product_no}}">
+        <img data-test="item-image" class="w3-round-large" :src="img" />
+      </router-link>
+    </div>
+      <div class="w3-container price-container">
+        <div class="w3-left discount" v-if="isDiscounted" data-test="discount-rate">
+            {{ displayDiscountRate }}
+        </div>
+        <div class="w3-left price" data-test="discount-price">
+          {{ priceWithComma }}
         </div>
       </div>
-      <div v-else>
-        <div data-test="original-price">{{ priceStringWithComma(original_price) }}</div>
+      <div class="w3-container w3-left info-container">
+        <div class="info-name" data-test="item-name">{{ name }}</div>
+        <div data-test="item-description">{{ description }}</div>
       </div>
-      <div data-test="item-name">{{ name }}</div>
-      <div data-test="item-description">{{ description }}</div>
     </div>
-  </div>
 </template>
 
 <script>
 export default {
-  name: 'Item',
+  name: 'ItemListItem',
   // 'item_image'를 어떻게 처리해야할지 고민해볼 것
-  props: ['price', 'original_price', 'name', 'description'],
-  methods: {
-    isDiscounted() {
-      if (this.price !== this.original_price) {
-        return true;
-      }
-      return false;
+  props: {
+    name: { type: String, default: '' },
+    price: { type: Number, default: 0 },
+    img: {
+      type: String,
+      default: 'https://projectlion-vue.s3.ap-northeast-2.amazonaws.com/items/suit-1.png',
     },
-    priceStringWithComma(value) {
-      return `${value.toLocaleString()}원`;
-    },
+    original_price: { type: Number, default: -1 },
+    description: { type: String, default: '' },
+    discount_rate: { type: Number, default: null },
+    product_no: { type: String, defualt: '' },
   },
   computed: {
-    discountRate() {
-      const rate = 100 - (this.price / this.original_price) * 100;
-      console.log(rate);
-      return `${rate}%`;
+    priceWithComma() {
+      return `${this.price.toLocaleString()}원`;
+    },
+    isDiscounted() {
+      return this.original_price !== -1;
+    },
+    displayDiscountRate() {
+      const rate = ((this.original_price - this.price) / this.original_price) * 100;
+      return `${rate.toFixed(0)}%`;
     },
   },
 };
 </script>
 
 <style>
-.item-list-item {
-  margin-bottom: 1em;
+img {
+  /* TODO img 사이즈 고정 필요*/
+  border: 1px solid black;
+  width: 100%;
 }
-.item-info {
+
+.discount {
+  padding-right: 5px;
+  color: red;
+  font-weight: bold;
+}
+
+.price {
+  font-weight: bold;
+}
+
+.info-container {
+  color: gray;
+}
+
+.info-container > .info-name {
+  font-weight: bold;
+}
+.info-name {
   display: flex;
-  flex-direction: column;
-  align-items: flex-start;
-}
-.item-discount {
-  display: flex;
-  flex-direction: row;
-}
-.dicount-rate {
-  color: #ff0000;
-  margin-right: 1em;
 }
 </style>

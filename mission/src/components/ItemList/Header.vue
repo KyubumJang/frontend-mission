@@ -1,7 +1,10 @@
 <template>
-  <div class="header" :class="{ 'header--hidden': !showHeader }">
-    <h2 class="header-title" data-test="header-title">{{ headerTitle }}</h2>
-  </div>
+  <header
+  class="w3-container" id="item-list-header">
+    <div class="header" :class="{ 'header--hidden': !showHeader }">
+      <h3>My Shopping Mall</h3>
+    </div>
+  </header>
 </template>
 
 <script>
@@ -32,8 +35,6 @@ export default {
       if (currentScrollPosition < 0) {
         return;
       }
-      // Stop executing this function if the difference between
-      // current scroll position and last scroll position is less than some offset
       if (Math.abs(currentScrollPosition - this.lastScrollPosition) < 60) {
         return;
       }
@@ -49,8 +50,8 @@ export default {
   display: flex;
   align-items: center;
   justify-content: center;
-  width: 390px;
-  height: 70px;
+  width: 100%;
+  height: 50px;
   left: 0px;
   top: 0px;
   background: #fff;
@@ -61,5 +62,11 @@ export default {
 .header.header--hidden {
   box-shadow: none;
   transform: translate3d(0, -100%, 0);
+}
+
+#item-list-header div {
+  margin-left: auto;
+  display: flex;
+  align-items: center;
 }
 </style>

@@ -1,15 +1,17 @@
 <template>
   <Header class="item-list-header" />
     <main>
-      <div class="w3-row item-list-main" data-test="item-list-page">
+      <h3 class="w3-container w3-left ">찜 목록</h3>
+      <div class="w3-row item-wish-main" data-test="item-wish-page">
         <ItemListItem
           v-for="item in items"
           :name="item.name"
           :description="item.description"
           :price="item.price"
           :original_price="item.original_price"
-          :key="item.name"
           :product_no="item.product_no"
+          :key="item.name"
+          :img="item.image"
           class="w3-col s6"
           data-test="item"
           >
@@ -24,11 +26,11 @@ import Header from '@/components/ItemList/Header.vue';
 import ItemListItem from '@/components/ItemList/Item.vue';
 import ItemListNav from '@/components/ItemList/Nav.vue';
 import {
-  getItem,
+  getItemWish,
 } from '../api/Item';
-
+// getItemByItemNo, getItemWish, getItemInfo, getCartItem,
 export default {
-  name: 'ItemListPage',
+  name: 'ItemWishPage',
   components: {
     Header,
     ItemListItem,
@@ -47,7 +49,7 @@ export default {
       this.items = null;
       this.loading = true;
       try {
-        const res = await getItem();
+        const res = await getItemWish();
         this.loading = false;
         this.items = res.data.items;
       } catch (err) {
@@ -63,7 +65,7 @@ export default {
 </script>
 
 <style>
-.item-list-main {
+.item-wish-main {
   padding-bottom: 60px;
 }
 

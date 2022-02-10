@@ -1,61 +1,42 @@
 import { mount } from '@vue/test-utils';
 import ItemListPage from '@/views/ItemList.vue';
+import ItemListItem from '@/components/ItemList/Item.vue';
 
+const dataItemList = [
+  {
+    name: '핏이 좋은 수트',
+    price: 198000,
+    display_price: '198,000원',
+    description: '아주 잘 맞는 수트',
+  },
+];
 describe('ItemListPage', () => {
   it('renders ItemListPage', () => {
     const wrapper = mount(ItemListPage);
-    expect(wrapper.find('#item-list-page').exists()).toBe(true);
-  });
-
-  // 헤더 컴포넌트
-  it('renders Header Component', () => {
-    const wrapper = mount(ItemListPage);
-    expect(wrapper.find('#header').exists()).toBe(true);
-  });
-
-  it('ItemListPage headerTitle equal Header Component headerTitle', () => {
-    const testHeaderTitle = 'My Shopping Mall';
-
-    const wrapper = mount(ItemListPage, {
-      data() {
-        return {
-          headerTitle: testHeaderTitle,
-        };
-      },
-    });
-    expect(wrapper.find('[data-test="header-title"').text()).toBe(testHeaderTitle);
+    expect(wrapper.find('[data-test="item-list-page"').exists()).toBe(true);
   });
 
   // ItemList 컴포넌트
-  it('renders Item Component', () => {
-    const wrapper = mount(ItemListPage);
-    expect(wrapper.find('#item-wrapper').exists()).toBe(true);
-  });
+  it('renders multiple Item Component', () => {
+    const wrapper = mount(ItemListPage, {
+      data() {
+        return { items: dataItemList };
+      },
+    });
+    const itemWrapper = wrapper.findAllComponents(ItemListItem);
 
-  // NAV 컴포넌트
-  it('renders NavBar Component', () => {
-    const wrapper = mount(ItemListPage);
-    expect(wrapper.find('#nav').exists()).toBe(true);
-  });
+    for (let i = 0; i < dataItemList.length; i += 1) {
+      const currentItemWrapper = itemWrapper[i];
 
-  it('renders home image, home text', () => {
-    const testHomeTitle = '홈';
-    const wrapper = mount(ItemListPage);
-    expect(wrapper.find('[data-test="home-title"]').text()).toBe(testHomeTitle);
-  });
-  it('renders home image, home text', () => {
-    const testLikeTitle = '찜';
-    const wrapper = mount(ItemListPage);
-    expect(wrapper.find('[data-test="like-title"]').text()).toBe(testLikeTitle);
-  });
-  it('renders home image, home text', () => {
-    const testCartTitle = '장바구니';
-    const wrapper = mount(ItemListPage);
-    expect(wrapper.find('[data-test="cart-title"]').text()).toBe(testCartTitle);
-  });
-  it('renders home image, home text', () => {
-    const testMyPageTitle = '마이 페이지';
-    const wrapper = mount(ItemListPage);
-    expect(wrapper.find('[data-test="mypage-title"]').text()).toBe(testMyPageTitle);
+      // expect(currentItemWrapper.get('[data-test="item-name"]').text()).toEqual(
+      //   dataItemList[i].name,
+      // );
+      // expect(currentItemWrapper.get('[data-test="item-price"]').text()).toEqual(
+      //   dataItemList[i].display_price,
+      // );
+      // expect(currentItemWrapper.get('[data-test="item-description"]').text()).toEqual(
+      //   dataItemList[i].description,
+      // );
+    }
   });
 });
