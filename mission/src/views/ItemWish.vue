@@ -28,7 +28,7 @@ import ItemListNav from '@/components/ItemList/Nav.vue';
 import {
   getItemWish,
 } from '../api/Item';
-// getItemByItemNo, getItemWish, getItemInfo, getCartItem,
+
 export default {
   name: 'ItemWishPage',
   components: {

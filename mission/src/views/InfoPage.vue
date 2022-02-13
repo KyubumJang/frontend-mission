@@ -19,7 +19,7 @@ import ItemListNav from '@/components/ItemList/Nav.vue';
 import {
   getInfo,
 } from '../api/User';
-// getItemByItemNo, getItemWish, getItemInfo, getCartItem,
+
 export default {
   name: 'UserInfoPage',
   components: {
