@@ -84,6 +84,7 @@
           id="btn-pruchase"
           class="w3-round-large"
           data-test="footer-price"
+          @click="add_cart()"
         >
           {{ `${priceStringWithComma(itemInfo.price)} 구매` }}
         </button>
@@ -129,6 +130,12 @@ export default {
       if (this.itemInfo) {
         return true;
       } return false;
+    },
+    add_cart() {
+      this.$store.commit('addCartItem', this.itemInfo);
+      this.$store.commit('setTotalPrice', this.itemInfo.price);
+      // eslint-disable-next-line no-alert
+      alert('장바구니에 추가되었습니다.');
     },
   },
   computed: {
