@@ -23,7 +23,6 @@
 <script>
 export default {
   name: 'ItemListItem',
-  // 'item_image'를 어떻게 처리해야할지 고민해볼 것
   props: {
     name: { type: String, default: '' },
     price: { type: Number, default: 0 },
@@ -53,7 +52,6 @@ export default {
 
 <style>
 img {
-  /* TODO img 사이즈 고정 필요*/
   border: 1px solid black;
   width: 100%;
 }

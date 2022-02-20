@@ -17,6 +17,15 @@
           >
         </ItemListItem>
       </div>
+      <div v-if="isCart()">
+          {{ `상품명: ${getCartItemsName} |` }}
+          {{ `개수: ${getCartCount} |` }}
+          {{ `총액: ${priceStringWithComma(getCartTotalPrice)}` }}
+      </div>
+      <router-link :to="{ name:'Order'}">
+        <button  class="w3-button w3-hover-gray w3-border">구매하러 가기</button>
+      </router-link>
+
     </main>
     <ItemListNav />
 </template>
@@ -28,7 +37,7 @@ import ItemListNav from '@/components/ItemList/Nav.vue';
 import {
   getCartItem,
 } from '../api/Item';
-// getItemByItemNo, getItemWish, getItemInfo, getCartItem,
+
 export default {
   name: 'ItemCartPage',
   components: {
@@ -56,8 +65,20 @@ export default {
         this.error = err.toString();
       }
     },
+    isCart() {
+      if (this.$store.getters.getCartCount !== 0) {
+        return true;
+      }
+      return false;
+    },
+    priceStringWithComma(value) { return `${value.toLocaleString()}원`; },
   },
-  computed: {},
+  computed: {
+    getCartItems() { return this.$store.getters.getCartItems; },
+    getCartItemsName() { return this.$store.getters.getCartItemsName; },
+    getCartCount() { return this.$store.getters.getCartCount; },
+    getCartTotalPrice() { return this.$store.getters.getCartTotalPrice; },
+  },
   created() {
     this.fetchData();
   },

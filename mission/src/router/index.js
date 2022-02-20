@@ -4,6 +4,8 @@ import ItemInfo from '@/views/ItemInfo.vue';
 import ItemWishPage from '@/views/ItemWish.vue';
 import ItemCartPage from '@/views/ItemCart.vue';
 import UserInfoPage from '@/views/InfoPage.vue';
+import ItemOrderPage from '@/views/ItemOrder.vue';
+import OrderCompletePage from '@/views/OrderCompletePage.vue';
 
 const routes = [
   {
@@ -14,10 +16,7 @@ const routes = [
   {
     path: '/about',
     name: 'About',
-    // route level code-splitting
-    // this generates a separate chunk (about.[hash].js) for this route
-    // which is lazy-loaded when the route is visited.
-    component: () => import(/* webpackChunkName: "about" */ '../views/About.vue'),
+    component: () => import('../views/About.vue'),
   },
   {
     path: '/item/:id',
@@ -38,6 +37,16 @@ const routes = [
     path: '/info',
     name: 'Info',
     component: UserInfoPage,
+  },
+  {
+    path: '/order',
+    name: 'Order',
+    component: ItemOrderPage,
+  },
+  {
+    path: '/order/complete',
+    name: 'OrderComplete',
+    component: OrderCompletePage,
   },
 ];
 
